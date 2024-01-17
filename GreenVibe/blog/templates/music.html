@@ -1,0 +1,228 @@
+{% extends 'navbar.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+       <div class="allDiv strap">
+              <a href="/ranking/" class="btnMargin"><button class="btnRanking">RANKINGI</button></a>
+              <a href="/blog/" class="btnMargin"><button class="btnRanking">POSTY</button></a>
+              <a href="/accountBlog/" class="btnMargin"><button class="btnRanking">PROFIL</button></a>
+       </div>
+
+       <!--
+<div class="allDiv audio">
+    <div class="allDiv audioElement">
+<audio class="audioPlayer" id="audioPlayer" controls loop>
+    <source id="audioSource" src="{% static 'music/song1.mp3' %}" type="audio/mpeg">
+    Twoja przeglądarka nie obsługuje odtwarzacza audio.
+</audio>
+</div>
+<div class="allDiv audioElement">
+  <button class="allButton audioButton" onclick="openPopup()">WYBIERZ PIOSENKE</button>
+</div>
+</div>
+
+<div class="popupSongs" id="popupSongs">
+    <div class="popupElement">
+        <button class="songs1" id="song1"><img src="{% static 'images/song1.jpg' %}" id="song1IMG" class="allButton circle-avatarMusic"></button>
+        <button class="songs1" id="song2"><img src="{% static 'images/song2.jpg' %}" id="song2IMG" class="allButton circle-avatarMusic"></button>
+    </div>
+    <div class="allDiv popupElement">
+        <button class="allText songs2" id="song3"><img src="{% static 'images/song3.jpg' %}" id="song3IMG" class="allButton circle-avatarMusic"></button>
+        <button class="allText songs3" id="song4"><img src="{% static 'images/song4.jpg' %}" id="song4IMG" class="allButton circle-avatarMusic"></button>
+    </div>
+    <button id="OKButton" onclick="closePopup()">OK</button>
+</div>
+
+<audio id="song1Player" style="display: none;" loop>
+    <source src="{% static 'music/song1.mp3' %}" type="audio/mpeg">
+    Twoja przeglądarka nie obsługuje odtwarzacza audio.
+</audio>
+
+<audio id="song2Player" style="display: none;" loop>
+    <source src="{% static 'music/song2.mp3' %}" type="audio/mpeg">
+    Twoja przeglądarka nie obsługuje odtwarzacza audio.
+</audio>
+
+<audio id="song3Player" style="display: none;" loop>
+    <source src="{% static 'music/song3.mp3' %}" type="audio/mpeg">
+    Twoja przeglądarka nie obsługuje odtwarzacza audio.
+</audio>
+
+<audio id="song4Player" style="display: none;" loop>
+    <source src="{% static 'music/song4.mp3' %}" type="audio/mpeg">
+    Twoja przeglądarka nie obsługuje odtwarzacza audio.
+</audio>
+
+<script>
+    var playButton1 = document.getElementById('song1');
+    var playButton2 = document.getElementById('song2');
+    var playButton3 = document.getElementById('song3');
+    var playButton4 = document.getElementById('song4');
+    var OKButton = document.getElementById('OKButton');
+    var selected_button = null;
+
+    var audioPlayer = document.getElementById('audioPlayer');
+    var audioPlayer1 = document.getElementById('song1Player');
+    var audioPlayer2 = document.getElementById('song2Player');
+    var audioPlayer3 = document.getElementById('song3Player');
+    var audioPlayer4 = document.getElementById('song4Player');
+    
+    var checkStorage = localStorage.getItem('check');
+    var check;
+    var audioPlayerSourceStorage;
+
+    if (checkStorage != 1 && checkStorage != 2 && checkStorage != 3 && checkStorage != 4) {
+        audioPlayerSourceStorage = audioPlayer.querySelector('source').getAttribute('src');
+    } else {
+        if (checkStorage == 1) {
+            audioPlayerSourceStorage = audioPlayer1.querySelector('source').getAttribute('src');
+        } else if (checkStorage == 2) {
+            audioPlayerSourceStorage = audioPlayer2.querySelector('source').getAttribute('src');
+        } else if (checkStorage == 3) {  
+            audioPlayerSourceStorage = audioPlayer3.querySelector('source').getAttribute('src');
+        } else {
+            audioPlayerSourceStorage = audioPlayer4.querySelector('source').getAttribute('src');
+        }
+    }
+
+    playButton1.addEventListener('click', function() {
+        audioPlayer.pause();
+        if (audioPlayer1.paused) {
+            audioPlayer2.pause();
+            audioPlayer3.pause();
+            audioPlayer4.pause();
+            audioPlayer1.play();
+            selected_button = 1;
+        } else {
+            audioPlayer1.pause();
+            selected_button = null;
+        }
+    });
+
+    playButton2.addEventListener('click', function() {
+        audioPlayer.pause();
+        if (audioPlayer2.paused) {
+            audioPlayer1.pause();
+            audioPlayer3.pause();
+            audioPlayer4.pause();
+            audioPlayer2.play();
+            selected_button = 2;
+        } else {
+            audioPlayer2.pause();
+            selected_button = null;
+        }
+    });
+
+    playButton3.addEventListener('click', function() {
+        audioPlayer.pause();
+        if (audioPlayer3.paused) {
+            audioPlayer1.pause();
+            audioPlayer2.pause();
+            audioPlayer4.pause();
+            audioPlayer3.play();
+            selected_button = 3;
+        } else {
+            audioPlayer3.pause();
+            selected_button = null;
+        }
+    });
+
+    playButton4.addEventListener('click', function() {
+        audioPlayer.pause();
+        if (audioPlayer4.paused) {
+            audioPlayer1.pause();
+            audioPlayer2.pause();
+            audioPlayer3.pause();
+            audioPlayer4.play();
+            selected_button = 4;
+        } else {
+            audioPlayer4.pause();
+            selected_button = null;
+        }
+    });
+
+    OKButton.addEventListener('click', function() {
+        if (selected_button == 1) {
+            check = 1;
+            var audio1 = audioPlayer1.querySelector('source').getAttribute('src');
+            audioPlayerSourceStorage = audioPlayer1.querySelector('source').getAttribute('src');
+            audioPlayer.querySelector('source').setAttribute('src', audio1);
+            audioPlayer1.pause();
+            audioPlayer.load();
+            audioPlayer.play();
+        
+        } else if (selected_button == 2) {
+            check = 2;
+            var audio2 = audioPlayer2.querySelector('source').getAttribute('src');
+            audioPlayerSourceStorage = audioPlayer2.querySelector('source').getAttribute('src');
+            audioPlayer.querySelector('source').setAttribute('src', audio2);
+            audioPlayer2.pause();
+            audioPlayer.load();
+            audioPlayer.play();
+            
+        } else if (selected_button == 3) {
+            check = 3;
+            var audio3 = audioPlayer3.querySelector('source').getAttribute('src');
+            audioPlayerSourceStorage = audioPlayer3.querySelector('source').getAttribute('src');
+            audioPlayer.querySelector('source').setAttribute('src', audio3);
+            audioPlayer3.pause();
+            audioPlayer.load();
+            audioPlayer.play();
+            
+        } else if (selected_button == 4) {
+            check = 4;
+            var audio4 = audioPlayer4.querySelector('source').getAttribute('src');
+            audioPlayerSourceStorage = audioPlayer4.querySelector('source').getAttribute('src');
+            audioPlayer.querySelector('source').setAttribute('src', audio4);
+            audioPlayer4.pause();
+            audioPlayer.load();
+            audioPlayer.play();
+            
+        } else {
+            pass;
+        }
+    });
+
+    if (check != 1 && check != 2 && check != 3 && check != 4) {
+        check = checkStorage;
+    }
+
+    var storedAudioPlayerSourceStorage = localStorage.getItem('audioPlayerSourceStorage');
+    const audio = document.getElementById('audioPlayer');
+    const isPlaying = localStorage.getItem('isPlaying') === 'true';
+    const currentTime = parseFloat(localStorage.getItem('currentTime')) || 0;
+
+    audio.currentTime = currentTime + 0.15;
+
+    if (isPlaying) {
+        audioPlayer.querySelector('source').setAttribute('src', storedAudioPlayerSourceStorage);
+        audio.autoplay = true;
+    }
+
+    window.addEventListener('unload', () => {
+        localStorage.setItem('isPlaying', audio.paused ? 'false' : 'true');
+        localStorage.setItem('currentTime', audio.currentTime.toString());
+        localStorage.setItem('audioPlayerSourceStorage', audioPlayerSourceStorage);
+        localStorage.setItem('check', check);
+    });
+
+</script>
+
+<script>
+    let popup = document.getElementById("popupSongs");
+    function openPopup() {
+        popup.classList.add("open-popupSongs");
+    }
+    function closePopup() {
+        popup.classList.remove("open-popupSongs");
+    }
+</script>
+-->
+<div class="containerItems">
+    <div class="content">
+        {% block contentMusic %}{% endblock contentMusic %}
+    </div>
+</div>
+
+{% endblock content %}
